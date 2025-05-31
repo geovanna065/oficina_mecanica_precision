@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Estoque</title>
+</head>
+<body>
+    <h1>Dashboard de Estoque</h1>
+    <a href="{% url 'novo_item' %}">Novo Item</a> | 
+    <a href="{% url 'movimentacao' %}">Movimentação de Estoque</a>
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th>Localização</th>
+            <th>Quantidade</th>
+            <th>Estoque Mínimo</th>
+            <th>Ações</th>
+        </tr>
+        {% for item in itens %}
+        <tr {% if item.em_alerta %}style="background-color: #f8d7da;"{% endif %}>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.codigo }}</td>
+            <td>{{ item.localizacao }}</td>
+            <td>{{ item.quantidade }}</td>
+            <td>{{ item.estoque_minimo }}</td>
+            <td><a href="{% url 'editar_item' item.id %}">Editar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
